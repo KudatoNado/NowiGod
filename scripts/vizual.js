@@ -7,6 +7,7 @@ let toys = [
         color: "жёлтый",
         size: "большой",
         favorite: false,
+        image: "./images/toy_red.png" 
     },
     {
         name: "Зелёный шар с цветочный узором",
@@ -16,6 +17,7 @@ let toys = [
         color: "зелёный",
         size: "большой",
         favorite: false,
+        image: "./images/toy_red.png" 
     },
     {
         name: "Красный шар с напалением",
@@ -25,7 +27,18 @@ let toys = [
         color: "красный",
         size: "большой",
         favorite: false,
+        image: "./images/toy_red.png" 
     },
+    { 
+        name: "Голубая игрушка с рисунком",
+         color: "red", 
+         count: 5, 
+         year: 2023, 
+         shape: "ball", 
+         favorite: true,
+         image: "./images/5309.png" 
+        },
+    
     // {
     //     name: "",
     //     count:,
@@ -35,6 +48,18 @@ let toys = [
     //     size: "",
     //     favorite:,
     // },
+];
+
+let tree =[
+    {
+
+    }
+];
+
+let garlands = [
+    { 
+
+    }
 ];
 
 toys.forEach(toy =>{
@@ -93,6 +118,22 @@ cleartoys()
 {
     this.toys=[]
 }
-}
+};
+
+let treel={
+    type:"snow",
+    heoight: "big",
+    toysCount:12
+};
+toys = toys.map((toy, index) => {
+    return {
+        ...toy,
+        id: index + 1,
+    };
+});
+console.log('updated toys:', toys);
+
+ 
+
 
 

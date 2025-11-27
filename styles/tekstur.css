@@ -1,0 +1,67 @@
+body {
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Neucha', cursive;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 1;
+}
+/* background: url("../images/background.png") center/cover no-repeat; */
+.button {
+    display: inline-block;                
+    padding: 12px 24px;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 12px;
+    background: transparent;
+    text-decoration: none;
+    cursor: pointer;
+  
+    transform: scale(1);                 
+    transition: transform 0.3s ease, 
+                all 0.3s ease;
+  }
+  
+  .button:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.05);              
+  }
+  .layout {
+    flex: 1 0 auto;
+    display: grid;
+    grid-template-columns: 400px 1fr 400px;
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    height: auto;
+  }
+  
+  .left-panel, .right-panel {
+    background: rgba(0, 0, 0, 0.45);
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+
+.centr{
+    display: flex;
+    
+
+}
+
+.main-tree{
+    background-image: url('../images/kam-idris-L9-sfN04jdk-unsplash 1.png');
+    
+}
+.toys-grid{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+  
