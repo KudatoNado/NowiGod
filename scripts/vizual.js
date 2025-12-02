@@ -50,11 +50,11 @@ let toys = [
     // },
 ];
 
-let tree =[
-    {
+// let tree =[
+//     {
 
-    }
-];
+//     }
+// ];
 
 let garlands = [
     { 
@@ -133,7 +133,50 @@ toys = toys.map((toy, index) => {
 });
 console.log('updated toys:', toys);
 
- 
+//  const title =document.querySelector("h2");
+//  const buttons =document.querySelectorAll(".btn");
+//  const buttons =document.querySelectorAll(".aplle");
+// img.scr = tree.png;
+// element.classList.add("active");
+// element.classList.remove("error");
+// element.classList.toggle("open");
+// lamp.classList.toggle("on");
 
+// const toy =document.querySelector(".toy");
+// console.log(toy.dataset.type);
+// console.log(toy.dataset.size);
+
+// document.querySelector("#main-title");
+// element.classList.add("highlight");
+
+const toysGrid= document.querySelector(".toys-grid");
+
+toys.forEach((toy,index)=>{
+    const toyBox =  document.createElement("div");
+
+    const img = document.createElement("img");
+    img.src= toy.image;
+    img.classList.add("toy");
+    img.draggable = true;
+    img.dataset.index = index;
+
+    const countBox = document.createElement("div");
+    countBox.textContent=toy.count;
+    countBox.style.color ="white";
+    countBox.style.textAlign="center";
+    countBox.style.fontSize ="14px";
+
+    toyBox.appendChild(img);
+    toyBox.appendChild(countBox);
+
+    toysGrid.appendChild(toyBox);
+    img.addEventListener("dragstart", e => {
+        if(toy.count=== 0){
+            e.preventDefault();
+            return;
+        }
+        e.dataTransfer.setData("tou", index);
+    });
+});
 
 
