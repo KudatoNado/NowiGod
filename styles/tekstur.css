@@ -1,5 +1,25 @@
+.toy-on-tree {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: auto;  
+  z-index: 5;            
+}
+.garland-on-tree {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 4;
+  animation: blink 1.6s infinite ease-in-out;
+}
 
+
+@keyframes blink {
+0%   { opacity: 1; }
+50%  { opacity: 0.3; }
+100% { opacity: 1; }
+}
 body {
+  
     background-image: url('../images/background.png');
     background-size: cover;
     background-position: center;
@@ -52,17 +72,19 @@ body {
 .centr{
     display: flex;
     
-
+}
+.tree-area{
+  position: relative;
 }
 
-.main-tree{
-    background-image: url('../images/kam-idris-L9-sfN04jdk-unsplash 1.png');
-    
-}
 .toys-grid{
     display: flex;
     flex-direction: row;
     gap: 25px;
     flex-wrap: wrap;
   }
-  
+
+  .main-tree {
+    display: flex;
+    justify-content: center;
+  }
