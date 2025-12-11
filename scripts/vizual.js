@@ -147,14 +147,14 @@ toys.forEach((toy,index)=>{
         }
         e.dataTransfer.setData("tou", index);
     });
-});
+  });
 
-window.addEventListener("scroll", () => {
+  window.addEventListener("scroll", () => {
     console.log("Прокручиваем!");
-});
+  });
 
 
-let currentTree = {
+  let currentTree = {
     type: "",
     garland: "",
     toys: [],
@@ -176,7 +176,8 @@ let currentTree = {
       console.log("Гирлянда:", this.garland);
       console.log("Игрушки:", this.toys);
     }
-};
+    
+  };
 
   const treeArea = document.querySelector(".tree-area");
   let placedCounter = 0;
@@ -285,3 +286,32 @@ let currentTree = {
 
 // document.querySelector("#main-title");
 // element.classList.add("highlight");
+ let treeData ={
+   type: currentTree.type,
+   garland: currentTree.type,
+   garland: currentTree.garland,
+   toys: currentTree.toys
+  };
+
+  function getResultCurrentTreeData(){
+    const resultCurrentTreeData ={
+      type: currentTree.type,
+      garland: currentTree.garland,
+      toys: currentTree.toys.map(toy => ({
+        id: toy.id,
+        x: toy.x,
+        y: toy.y,
+        image: toy.image
+      }))
+    };
+    return resultCurrentTreeData;
+  }
+
+  const saveTreeBtn = document.getElementById("save-tree-btn");
+  saveTreeBtn.addEventListener("click", () => {
+    const resultCurrentTreeData = getResultCurrentTreeData();
+    console.log(resultCurrentTreeData);
+
+    const getResultCurrentTreeJSON = JSON.stringify(resultCurrentTreeData);
+    console.log(getResultCurrentTreeJSON);
+  });
