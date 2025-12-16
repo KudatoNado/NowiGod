@@ -145,7 +145,7 @@ toys.forEach((toy,index)=>{
             e.preventDefault();
             return;
         }
-        e.dataTransfer.setData("tou", index);
+        e.dataTransfer.setData("toy", index);
     });
   });
 
@@ -186,20 +186,24 @@ toys.forEach((toy,index)=>{
   
   treeArea.addEventListener("drop", e => {
     e.preventDefault();
+
+    
   
     const rect = treeArea.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
   
     if (e.dataTransfer.getData("toy") !== "") {
+      
       const toyIndex = e.dataTransfer.getData("toy");
       const toy = toys[toyIndex];
   
       if (toy.count > 0) {
         toy.count--;
   
-        const xPos = x - 40;
-        const yPos = y - 40;
+        
+        const xPos = x - 20;
+        const yPos = y - 20;
      
         const placedId = placedCounter;
   
@@ -315,3 +319,5 @@ toys.forEach((toy,index)=>{
     const getResultCurrentTreeJSON = JSON.stringify(resultCurrentTreeData);
     console.log(getResultCurrentTreeJSON);
   });
+
+
