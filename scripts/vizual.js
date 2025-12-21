@@ -38,12 +38,74 @@ let toys = [
          favorite: true,
          image: "./images/5309.png" 
         },
+        {
+          name: "Зелёный шар с блестками",
+          color: "зелёный",
+          count: 5,
+          year: 2023,
+          shape: "шар",
+          size: "маленький",
+          favorite: true,
+          image: "./images/zelen_shar-removebg-preview.png"
+        },
+
+        { 
+        name: "Бело-красноя игрушка",
+         color: "белый-красный", 
+         count: 5, 
+         year: 2023, 
+         shape: "маленький", 
+         favorite: true,
+         image: "./images/5295.png" 
+        },
+        { 
+        name: "калакольчик",
+         color: "белый", 
+         count: 5, 
+         year: 2023, 
+         shape: "маленький", 
+         favorite: true,
+         image: "./images/5302.png" 
+        },
+        { 
+        name: "игрушка-винограт",
+         color: "крассный", 
+         count: 5, 
+         year: 2023, 
+         shape: "маленький", 
+         favorite: true,
+         image: "./images/5301.png" 
+        },
+        { 
+        name: "шишка",
+         color: "белый", 
+         count: 5, 
+         year: 2023, 
+         shape: "большой", 
+         favorite: true,
+         image: "./images/5304.png" 
+        },
+        { 
+        name: "шар с ресунком",
+         color: "голубой", 
+         count: 5, 
+         year: 2023, 
+         shape: "маленький", 
+         favorite: true,
+         image: "./images/5307.png" 
+        },
 ];
 
 let garlands = [
     { 
-
-    }
+        name: "разноцветная",
+         color: "радуга", 
+         count: 5, 
+         year: 2023, 
+         shape: "большое", 
+         favorite: true,
+         image: "./images/Garland_1.png" 
+    },
 ];
 
 toys.forEach(toy =>{
@@ -57,6 +119,17 @@ toys.forEach(toy =>{
         toy.count
     );
 });
+garlands.forEach(garland =>{
+    console.log(
+        garland.name + 
+        " - " +
+        garland.color +
+        ", forma: " +
+        garland.shape +
+        ", kol:" +
+        garland.count
+    );
+});
 
 let updatedToys = toys.map( toy => {
     return{
@@ -64,22 +137,29 @@ let updatedToys = toys.map( toy => {
     count: toy.count + 1        
     };
 });
+let updatedGarlands = garlands.map( garland => {
+    return{
+    ...garland,
+    count: garland.count + 1        
+    };
+});
 
 console.log(updatedToys);
+console.log(updatedGarlands);
 
-function User(name, age)
-{
-    this.name=name;
-}
-let person ={
-name: "Анна",
-greet()
-{
-    console.log("Ghbdtn");
-}
+// function User(name, age)
+// {
+//     this.name=name;
+// }
+// let person ={
+// name: "Анна",
+// greet()
+// {
+//     console.log("Ghbdtn");
+// }
 
 
-}
+// }
 let toystore={
     list:["redball","blueball","greenball"]
 ,
@@ -88,9 +168,18 @@ return this.list[index];
 }
 };
 
+let garlandstore={
+    list:["garlanda-blue","garlanda-rgb","garlanda-red"]
+,
+getgarland(index){
+return this.list[index];
+}
+};
+
 let tree={
 type: "green",
 toys:[1],
+garlands:[2],
 changetree(newtype)
 {
     this.type=newtype;
@@ -102,6 +191,14 @@ addtoy(toy)
 cleartoys()
 {
     this.toys=[]
+},
+addgarlands(garland)
+{
+    this.garlands.push(garland);
+},
+cleargarlands()
+{
+    this.garlands=[]
 }
 };
 
@@ -116,10 +213,18 @@ toys = toys.map((toy, index) => {
         id: index + 1,
     };
 });
+garlands = garlands.map((garland, index) => {
+    return {
+        ...garland,
+        id: index + 1,
+    };
+});
 console.log('updated toys:', toys);
+console.log('updated garlands:', garlands);
 
 
 const toysGrid= document.querySelector(".toys-grid");
+const garlandsGrid= document.querySelector(".garlands-grid");
 
 toys.forEach((toy,index)=>{
     const toyBox =  document.createElement("div");
@@ -141,13 +246,44 @@ toys.forEach((toy,index)=>{
 
     toysGrid.appendChild(toyBox);
     img.addEventListener("dragstart", e => {
-        if(toy.count=== 0){
+    if (toy.count === 0) {
+        e.preventDefault();
+        return;
+    }
+    e.dataTransfer.setData("toy", index);
+    });
+  });
+
+
+garlands.forEach((garland, index) => {
+    const garlandBox = document.createElement("div");
+
+    const img = document.createElement("img");
+    img.src = garland.image;
+    img.classList.add("garland");
+    img.draggable = true;
+    img.dataset.index = index;
+
+    const countBox = document.createElement("div");
+    countBox.textContent = garland.count;
+    countBox.style.color = "white";
+    countBox.style.textAlign = "center";
+    countBox.style.fontSize = "14px";
+
+    garlandBox.appendChild(img);
+    garlandBox.appendChild(countBox);
+
+    img.addEventListener("dragstart", e => {
+        if (garland.count === 0) {
             e.preventDefault();
             return;
         }
-        e.dataTransfer.setData("toy", index);
+        e.dataTransfer.setData("garland", index); 
     });
-  });
+});
+
+
+
 
   window.addEventListener("scroll", () => {
     console.log("Прокручиваем!");
@@ -156,24 +292,22 @@ toys.forEach((toy,index)=>{
 
   let currentTree = {
     type: "",
-    garland: "",
+    garlands: [],
     toys: [],
   
     setTree(newType) {
       this.type = newType;
     },
-  
-    setGarland(newGarland) {
-      this.garland = newGarland;
-    },
 
     addToy(toyObj) {
       this.toys.push(toyObj);
     },
-  
+    addgarlands(garlandObj) {
+        this.garlands.push(garlandObj);
+      },
     showInfo() {
       console.log("Ёлка:", this.type);
-      console.log("Гирлянда:", this.garland);
+      console.log("Гирлянда:", this.garlands);
       console.log("Игрушки:", this.toys);
     }
     
@@ -248,11 +382,36 @@ toys.forEach((toy,index)=>{
     }
   
     if (e.dataTransfer.getData("garland") !== "") {
-      const gIndex = e.dataTransfer.getData("garland");
-      const garland = garlands[gIndex];
-  
-      currentTree.setGarland(garland.type);
-  
+  const gIndex = e.dataTransfer.getData("garland");
+  const garland = garlands[gIndex];
+
+  const img = document.createElement("img");
+  img.src = garland.image;
+  img.classList.add("garland-on-tree");
+
+  img.style.left = (x - 140) + "px";
+  img.style.top = (y - 20) + "px";
+  img.style.animationDelay = (Math.random() * 1.6) + "s";
+
+  treeArea.appendChild(img);
+
+  // сохраняем в объект текущей ёлки
+  currentTree.addgarlands({
+    id: garland.id,
+    x: x - 140,
+    y: y - 20,
+    image: garland.image
+  });
+
+  img.addEventListener("click", () => {
+    img.remove();
+    currentTree.garlands = currentTree.garlands.filter(
+      g => g.id !== garland.id
+    );
+  });
+}
+
+
       const img = document.createElement("img");
       img.src = garland.image;
       img.classList.add("garland-on-tree");
@@ -271,7 +430,7 @@ toys.forEach((toy,index)=>{
         currentTree.setGarland("");
       });
     }
-  });
+);
 
 
 
@@ -292,15 +451,21 @@ toys.forEach((toy,index)=>{
 // element.classList.add("highlight");
  let treeData ={
    type: currentTree.type,
-   garland: currentTree.type,
    garland: currentTree.garland,
    toys: currentTree.toys
   };
+  
+
 
   function getResultCurrentTreeData(){
     const resultCurrentTreeData ={
       type: currentTree.type,
-      garland: currentTree.garland,
+      garland: currentTree.garlands.map(garland=>({
+        id: garland.id,
+        x: garland.x,
+        y: garland.y,
+        image: garland.image
+      })),
       toys: currentTree.toys.map(toy => ({
         id: toy.id,
         x: toy.x,
@@ -348,3 +513,53 @@ toys.forEach((toy,index)=>{
   });
 
 
+const enableBtn = document.getElementById("enable-effects");
+const disableBtn = document.getElementById("disable-effects");
+
+disableBtn.addEventListener("click", () => {
+  document.body.classList.add("no-effects");
+  disableBtn.style.display = "none";
+  enableBtn.style.display = "flex";
+});
+
+enableBtn.addEventListener("click", () => {
+  document.body.classList.remove("no-effects");
+  enableBtn.style.display = "none";
+  disableBtn.style.display = "flex";
+});
+
+function createSnowflake() {
+  const snowflake = document.createElement("div");
+  snowflake.classList.add("snowflake");
+  snowflake.textContent = "❄️";
+
+  snowflake.style.left = Math.random() * window.innerWidth + "px";
+  snowflake.style.fontSize = (Math.random() * 10 + 10) + "px";
+  snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+  document.body.appendChild(snowflake);
+
+  setTimeout(() => {
+    snowflake.remove();
+  }, 5000);
+}
+
+let snowInterval;
+function startSnow() {
+  snowInterval = setInterval(createSnowflake, 300);
+}
+function stopSnow() {
+  clearInterval(snowInterval);
+}
+
+disableBtn.addEventListener("click", () => {
+  stopSnow();
+  disableBtn.style.display = "none";
+  enableBtn.style.display = "flex";
+});
+
+enableBtn.addEventListener("click", () => {
+  startSnow();
+  enableBtn.style.display = "none";
+  disableBtn.style.display = "flex";
+});
